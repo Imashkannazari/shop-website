@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block contect %}
+{% load static %}
+{% load humanize %}
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">سبد خرید</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">test project</p>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <div class="container py-5">
+            {% if user.is_authenticated %}
+                {% if cart_items %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle text-center">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>محصول</th>
+                                    <th>تعداد</th>
+                                    <th>قیمت واحد</th>
+                                    <th>قیمت کل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart_items %}
+                                    <tr>
+                                        <td>{{ item.product_name }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>{{ item.unit_price|intcomma }}</td>
+                                        <td>{{ item.line_total|intcomma }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <h5 class="mt-4">مجموع: {{ total_price|intcomma }}</h5>
+                {% else %}
+                    <div class="alert alert-info">سبد خرید شما خالی است.</div>
+                {% endif %}
+            {% else %}
+                <div class="alert alert-warning">
+                    برای مشاهده سبد خرید، ابتدا وارد حساب شوید یا ثبت نام کنید.
+                </div>
+                <a href="{% url 'singup' %}" class="btn btn-secondary">رفتن به ثبت نام</a>
+            {% endif %}
+        </div>
+{% endblock %}

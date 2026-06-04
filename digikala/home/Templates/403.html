@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block contect %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">403</h1>
+            <p class="lead fw-normal text-white-50 mb-0">دسترسی غیرمجاز</p>
+        </div>
+    </div>
+</header>
+<div class="container py-5 text-center">
+    <p>شما اجازه دسترسی به این صفحه را ندارید.</p>
+    <a href="{% url 'home' %}" class="btn btn-secondary">بازگشت به صفحه اصلی</a>
+</div>
+{% endblock %}
